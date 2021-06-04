@@ -11,7 +11,7 @@ import kodlama.hrms.entities.dtos.JobAdvertDto;
 public interface JobAdvertService {
 	
 	DataResult<List<JobAdvert>> getall();
-	Result add(JobAdvert jobAdvert);
+	Result add(JobAdvert jobAdvert );
 	//DataResult<List<JobAdvert>> getAllOpenJobAdvertList();
 	DataResult<List<JobAdvertDto>> getAllOpenJobAdvertByEmployers(int id);
 	DataResult<List<JobAdvertDto>> getActiveAdvert();

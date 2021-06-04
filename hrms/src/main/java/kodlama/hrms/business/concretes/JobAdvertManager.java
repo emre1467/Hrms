@@ -10,6 +10,7 @@ import kodlama.hrms.core.utilities.results.DataResult;
 import kodlama.hrms.core.utilities.results.Result;
 import kodlama.hrms.core.utilities.results.SuccessDataResult;
 import kodlama.hrms.core.utilities.results.SuccessResult;
+import kodlama.hrms.dataAccess.abstracts.CityDao;
 import kodlama.hrms.dataAccess.abstracts.JobAdvertDao;
 import kodlama.hrms.entities.concretes.JobAdvert;
 import kodlama.hrms.entities.dtos.JobAdvertDto;
@@ -19,8 +20,9 @@ import kodlama.hrms.entities.dtos.JobAdvertDto;
 public class JobAdvertManager implements JobAdvertService{
 	
 	private JobAdvertDao jobAdvertDao;
+
 	
-	public JobAdvertManager(JobAdvertDao jobAdvertDao) {
+	public JobAdvertManager(JobAdvertDao jobAdvertDao,CityDao cityDao) {
 		super();
 		this.jobAdvertDao = jobAdvertDao;
 	}
@@ -33,6 +35,7 @@ public class JobAdvertManager implements JobAdvertService{
 	@Override
 	public Result add(JobAdvert jobAdvert) {
 		this.jobAdvertDao.save(jobAdvert);
+		
 		return new SuccessResult("jobadvert tablosuna eklendi");
 	}
 

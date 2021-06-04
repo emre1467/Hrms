@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY) //bunu vermeyince, hep api hem de pg adminden değişiklik yapmamıza izin veriyor. bunu koymadığımıza id'ler çakışıyor. ya veritabanı üzerinden ya da api üzerinden ekleme yapabiliyoruz.
+	@GeneratedValue(strategy= GenerationType.IDENTITY) 
 	@Column(name="id")
 	private int id;
 

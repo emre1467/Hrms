@@ -1,11 +1,18 @@
 package kodlama.hrms.entities.concretes;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +26,7 @@ import lombok.NoArgsConstructor;
 @Table(name="candidates")
 @EqualsAndHashCode(callSuper=false) 
 @PrimaryKeyJoinColumn(name = "user_id",referencedColumnName = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidate"})
 public class Candidate extends User {
 
 	@Column(name="first_name")
@@ -33,8 +41,35 @@ public class Candidate extends User {
 	@Column(name="date_of_birth")
 	private LocalDate dateOfBirth;
 	
+	@Column(name="picture_url")
+	private String pictureUrl;
+	
 	@Column(name="is_verified_by_email")
 	private Boolean isEmailVerified;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy ="candidate")
+	private List<CoverLetter> coverLetters;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="candidate")
+	private List<JobExperience> jobExperiences;
+
+	@JsonIgnore
+	@OneToMany(mappedBy="candidate")
+	private List<Language> languages;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="candidate")
+	private List<Link> links;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="candidate")
+	private List<School> schools;
+	@JsonIgnore
+	@OneToMany(mappedBy="candidate")
+	private List<Skill> skills;
  
+	@OneToOne(mappedBy="candidate",optional=false, fetch = FetchType.LAZY)
+	private Image image;
 }
