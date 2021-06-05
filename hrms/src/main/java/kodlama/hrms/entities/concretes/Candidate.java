@@ -12,7 +12,6 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Table(name="candidates")
 @EqualsAndHashCode(callSuper=false) 
 @PrimaryKeyJoinColumn(name = "user_id",referencedColumnName = "id")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidate"})
+
 public class Candidate extends User {
 
 	@Column(name="first_name")
@@ -41,11 +40,23 @@ public class Candidate extends User {
 	@Column(name="date_of_birth")
 	private LocalDate dateOfBirth;
 	
+	@Column(name="is_verified_by_email")
+	private Boolean isEmailVerified;
+	
 	@Column(name="picture_url")
 	private String pictureUrl;
 	
-	@Column(name="is_verified_by_email")
-	private Boolean isEmailVerified;
+	
+	@Column(name="created_date")
+	@JsonIgnore
+	private LocalDate createdDate=LocalDate.now();
+	
+	@Column(name="is_deleted",columnDefinition = "boolean default false")
+	@JsonIgnore
+	private Boolean isDeleted=false;
+	
+	
+   // relational Properties
 	
 	@JsonIgnore
 	@OneToMany(mappedBy ="candidate")
@@ -54,7 +65,7 @@ public class Candidate extends User {
 	@JsonIgnore
 	@OneToMany(mappedBy="candidate")
 	private List<JobExperience> jobExperiences;
-
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="candidate")
 	private List<Language> languages;
@@ -66,10 +77,12 @@ public class Candidate extends User {
 	@JsonIgnore
 	@OneToMany(mappedBy="candidate")
 	private List<School> schools;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="candidate")
 	private List<Skill> skills;
- 
-	@OneToOne(mappedBy="candidate",optional=false, fetch = FetchType.LAZY)
+	
+	@JsonIgnore
+	@OneToOne(mappedBy="candidate",optional=false, fetch=FetchType.LAZY)
 	private Image image;
 }

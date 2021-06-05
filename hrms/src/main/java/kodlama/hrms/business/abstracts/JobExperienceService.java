@@ -9,4 +9,5 @@ import kodlama.hrms.entities.concretes.JobExperience;
 public interface JobExperienceService {
 	DataResult<List<JobExperience>> getall();
 	Result add(JobExperience experience);
+	DataResult<List<JobExperience>> getAllByCandidateId(int candidateId);
 }

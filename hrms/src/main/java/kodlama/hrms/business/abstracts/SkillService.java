@@ -1,6 +1,6 @@
 package kodlama.hrms.business.abstracts;
 
-import java.util.List;
+import java.util.*;
 
 
 
@@ -9,6 +9,7 @@ import kodlama.hrms.core.utilities.results.Result;
 import kodlama.hrms.entities.concretes.Skill;
 
 public interface SkillService {
-	DataResult<List<Skill>> getall();
+
 	Result add(Skill skill);
+	DataResult<List<Skill>> getAllByCandidateId(int candidateId);
 }

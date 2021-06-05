@@ -12,6 +12,7 @@ import kodlama.hrms.core.utilities.results.SuccessResult;
 import kodlama.hrms.dataAccess.abstracts.JobExperienceDao;
 import kodlama.hrms.entities.concretes.JobExperience;
 
+
 @Service
 public class JobExperienceManager implements JobExperienceService{
 
@@ -31,6 +32,11 @@ public class JobExperienceManager implements JobExperienceService{
 	public Result add(JobExperience experience) {
 		this.jobExperienceDao.save(experience);
 		return new SuccessResult("Ekleme başarılı");
+	}
+
+	@Override
+	public DataResult<List<JobExperience>> getAllByCandidateId(int candidateId) {
+		return new SuccessDataResult<List<JobExperience>>(this.jobExperienceDao.findAllByCandidate_Id(candidateId));
 	}
 
 }

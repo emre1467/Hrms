@@ -35,6 +35,6 @@ public class SchoolsController {
 	
 	@GetMapping("/findAllByCandidate_IdOrderByGraduationYear")
 	public DataResult<List<School>> findAllByCandidate_IdOrderByGraduationYear(int candidateId){
-		return this.schoolService.findAllByCandidate_IdOrderByGraduationYear(candidateId);
+		return this.schoolService.getAllByCandidate_IdOrderByGraduationYear(candidateId);
 	}
 }

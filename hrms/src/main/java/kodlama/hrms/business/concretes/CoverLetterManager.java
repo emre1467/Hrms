@@ -32,4 +32,9 @@ public class CoverLetterManager implements CoverLetterService{
 		return new SuccessResult("Kaydedildi");
 	}
 
+	@Override
+	public DataResult<List<CoverLetter>> getAllByCandidateId(int candidateId) {
+		return new SuccessDataResult<List<CoverLetter>>(this.coverLetterDao.findAllByCandidate_Id(candidateId));
+	}
+
 }

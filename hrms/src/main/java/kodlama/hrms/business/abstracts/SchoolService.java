@@ -11,5 +11,6 @@ import kodlama.hrms.entities.concretes.School;
 public interface SchoolService {
 	DataResult<List<School>> getall();
 	Result add(School school);
-	DataResult<List<School>>  findAllByCandidate_IdOrderByGraduationYear(int candidateId);
+	DataResult<List<School>>  getAllByCandidate_IdOrderByGraduationYear(int candidateId);
+	DataResult<List<School>> getAllByCandidateId(int candidateId);
 }
